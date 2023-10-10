@@ -1,1 +1,1 @@
-![Poster](./assets/template-step-1.png)
+![Poster](./public/poster.jpg)
