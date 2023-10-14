@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 import { formValidation, inputClean } from 'utils/formValidation.js';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 
-export const ContactForm = ({ handleFormSubmit }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     switch (event.target.name) {
@@ -22,7 +26,7 @@ export const ContactForm = ({ handleFormSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
     if (formValidation(event.currentTarget) === true) {
-      handleFormSubmit({ name, number });
+      dispatch(addContact({ name, number, id: nanoid() }));
       setName('');
       setNumber('');
     }
